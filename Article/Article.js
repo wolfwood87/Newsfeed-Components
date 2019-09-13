@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'This is a new Article',
+    date: 'September 10, 2019',
+    firstParagraph: `I wish it need not have happened in my time,’ said Frodo. ‘So do I,’ said Gandalf, ‘and so do all who live to see such times. But that is not for them to decide. All we have to decide is what to do with the time that is given us. `,
+
+    secondParagraph: `‘Many that live deserve death. And some that die deserve life. Can you give it to them? Then do not be too eager to deal out death in judgement. For even the very wise cannot see all ends.`,
+
+    thirdParagraph: `The world is changed. I feel it in the water. I feel it in the earth. I smell it in the air. Much that once was, is lost. For none now live, who remember it. It began with the forging of the Great Rings. Three were given to the Elves, immortal, wisest and fairest of all beings. Seven, to the Dwarf lords, great miners and craftsmen of the mountain halls. And nine, nine rings were gifted to the race of Men, who above all else, desire power. For within these Rings was bound the strength and will to govern each race. But they were all of them, deceived. For another ring was made. In the land of Mordor, in the fires of Mount Doom, the dark lord Sauron forged in scret a master ring to control all others. And into this ring, he poured his cruelty, his malice and his will to dominate all life. One Ring to rule them all...`
   }
 ];
 
@@ -99,6 +108,7 @@ const data = [
     <span class='expandButton'></span>
   </div>
 
+
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
@@ -112,3 +122,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function createComponent(info) {
+  //create Elements
+  const article = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const par1 = document.createElement('p');
+  const par2 = document.createElement('p');
+  const par3 = document.createElement('p');
+  const expand = document.createElement('span');
+
+  //append elements to parent div
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(par1);
+  article.appendChild(par2);
+  article.appendChild(par3);
+  article.appendChild(expand);
+
+  //add content to Elements
+  title.textContent = info.title;
+  date.textContent = info.date;
+  par1.textContent = info.firstParagraph;
+  par2.textContent = info.secondParagraph;
+  par3.textContent = info.thirdParagraph;
+  expand.textContent = 'expand';
+
+  //add classes to Elements
+  article.classList.add('article');
+  date.classList.add('date');
+  expand.classList.add('expandButton');
+  //add event listener to Button
+  expand.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  });
+
+  return article;
+}
+
+const articles = document.querySelector('.articles');
+
+
+data.forEach((news) => {
+  articles.appendChild(createComponent(news));
+});
